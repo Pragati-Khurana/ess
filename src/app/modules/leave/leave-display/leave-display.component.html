@@ -1,0 +1,78 @@
+<body>
+
+    <ng-template #mymodal let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">{{ModalTitle}}</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            x
+          </button>
+        </div>
+        <div class="modal-body">
+          <app-edit-leave [leave]="leave"></app-edit-leave>
+        </div>
+      </ng-template>
+
+    <div class="my-2">
+        {{appStatus | async}}
+    </div>
+
+    <div class="card card-custom gutter-b">
+        <div class="card-header">
+            <div class="card-title">
+            <h3 class="card-label">Leave Requests</h3>
+            </div>
+        
+        </div>
+        <div class="card-body">
+            <div class="table-responsive angular-bootstrap-table">
+                <table class="table table-vertical-center overflow-hidden">
+                  <thead>
+                    
+                    <th>Application Date</th>
+                    <th>Employee Name </th>
+                    <th>From Date</th>
+                    <th>To Date</th>
+                    <th>Leave Type</th>
+                    <th>Remarks</th>
+                    <th>IsApproved</th>
+                    <th>ApprovedBy</th>
+                    <th>ApprovedDate</th>
+                    <th>IsReject</th>
+                    <th>RejectBy</th>
+                    <th>Action</th>
+                    <th>Action</th>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of leaveList">
+                      <td>{{ item.ApplicationDate }}</td>
+                      <td>{{ item.EmpId }}</td>
+                      <td>{{ item.FromDate.toString().substr(0,10) }}</td>
+                      <td>{{ item.ToDate.toString().substr(0,10) }}</td>
+                      <td>{{ item.LeaveId }}</td>
+                      <td>{{ item.Remark }}</td>   
+                      <td>{{ item.IsApproved }}</td>
+                      <td>{{ item.ApprovedBy }}</td>
+                      <td>{{ item.ApprovedDate }}</td>
+                      <td>{{ item.IsReject }}</td>
+                      <td>{{ item.RejectBy }}</td>
+                      <td>
+                        <a title="Edit customer" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3" (click)="editClick(item,mymodal)">
+                          <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
+                            class="svg-icon svg-icon-md svg-icon-primary">
+                          </span>
+                        </a>   
+                      </td>
+                      <td>
+                        <a title="Delete customer" class="btn btn-icon btn-light btn-hover-danger btn-sm" (click)="deleteClick(item)">
+                            <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="true"
+                              class="svg-icon svg-icon-md svg-icon-danger">
+                            </span>
+                          </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>

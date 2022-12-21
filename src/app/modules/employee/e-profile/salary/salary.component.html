@@ -1,0 +1,25 @@
+<div class="my-2">
+  {{appStatus | async}}
+</div>
+<p class="h1">Salary Details</p>
+<div class="table-responsive angular-bootstrap-table">
+    <table class="table table-vertical-center overflow-hidden">
+        <thead class="">
+            <tr>
+              <th scope="col">Basic</th>
+              <th scope="col">HRA</th>
+              <th scope="col">Total Gross</th>
+              <th scope="col">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+              
+            <tr *ngFor="let dataItem of salList">
+              <td>{{dataItem.Basic}}</td>
+              <td>{{dataItem.HRA}}</td>
+              <td>{{dataItem.TotalGross_Master}}</td>
+              <td>{{dataItem.RecordType}}</td>
+            </tr>
+          </tbody>
+    </table>
+  </div>

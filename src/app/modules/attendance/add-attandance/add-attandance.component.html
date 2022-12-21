@@ -1,0 +1,116 @@
+<body *ngIf="!checkHead">
+    <form novalidate #userForm="ngForm">
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-12 mt-5">
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-2">Emp Name</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="ename" [(ngModel)]="ename" placeholder="Employee Name">
+                        </div>
+
+                        <label class="col-form-label col-sm-2">ACard No.</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="cardno" [(ngModel)]="cardno" placeholder="Attandance Card No">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-2">Punch Date</label>
+                        <div class="col-sm-4">
+                            <input type="date" #pdate="ngModel" class="form-control" name="pdate" [class.is-invalid]="pdate.invalid && pdate.touched" required [(ngModel)]="attModel.pdate" placeholder="Punch Date">
+                            <small class="text-danger" [class.d-none]="pdate.valid || pdate.untouched">Punch Date is required</small>
+                        </div>
+
+                        <label class="col-form-label col-sm-2">Muster Status</label>
+                        <div class="col-sm-4">
+                            <input type="text" #mstatus="ngModel" class="form-control" name="mstatus" [class.is-invalid]="mstatus.invalid && mstatus.touched" required [(ngModel)]="attModel.mstatus" placeholder="Muster Status">
+                            <small class="text-danger" [class.d-none]="mstatus.valid || mstatus.untouched">Muster Status is required</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-2">In Time</label>
+                        <div class="col-sm-4">
+                            <input type="text" #itime="ngModel" class="form-control" name="itime" [class.is-invalid]="itime.invalid && itime.touched" required [(ngModel)]="attModel.itime" placeholder="In Time">
+                            <small class="text-danger" [class.d-none]="itime.valid || itime.untouched">In Time is required</small>
+                        </div>
+
+                        <label class="col-form-label col-sm-2">Out Time</label>
+                        <div class="col-sm-4">
+                            <input type="text" #otime="ngModel" class="form-control" name="otime" [class.is-invalid]="otime.invalid && otime.touched" required [(ngModel)]="attModel.otime" placeholder="Out Time">
+                            <small class="text-danger" [class.d-none]="otime.valid || otime.untouched">Out Time is required</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-3">
+                            <button class="btn btn-lg btn-outline-dark float-right" [disabled]="userForm.form.invalid" (click)="attandanceRequest()">Request</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </form>
+</body>
+
+<body>
+    <form>
+        <div class="container-fluid" *ngIf="checkHead">
+            <div class="row">
+
+                <div class="col-12 mt-5">
+                    <div class="form-group row">
+
+                        <label class="col-form-label col-sm-2">Employee Id</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="empid2" [(ngModel)]="empid2" placeholder="Employee Id">
+                        </div>
+
+
+                        <label class="col-form-label col-sm-2">Punch Date</label>
+                        <div class="col-sm-4">
+                            <input type="date" class="form-control" name="pdate2" [(ngModel)]="pdate2" placeholder="Punch Date">
+                        </div>
+
+                    </div>
+
+                    <div class="form-group row">
+                        
+
+                        <label class="col-form-label col-sm-2">Muster Status</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="mstatus2" [(ngModel)]="mstatus2" placeholder="Muster Status">
+                        </div>
+
+
+                        <label class="col-form-label col-sm-2">In Time</label>
+                        <div class="col-sm-4">
+                            <input type="datetime" class="form-control" name="itime2" [(ngModel)]="itime2" placeholder="In Time">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        
+
+                        <label class="col-form-label col-sm-2">Out Time</label>
+                        <div class="col-sm-4">
+                            <input type="datetime" class="form-control" name="otime2" [(ngModel)]="otime2" placeholder="Out Time">
+                        </div>
+                    </div>
+
+                    <div>
+                        <div>
+                            <button class="btn btn-lg btn-outline-dark float-right" (click)="attendanceadd()">Add Attendance</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </form>
+</body>

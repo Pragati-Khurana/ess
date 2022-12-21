@@ -1,0 +1,183 @@
+<!-- <div class="card card-custom gutter-b">
+    <div class="card-header">
+      <div class="card-title">
+        <h3 class="card-label">My Monthly Attendance Information</h3>
+      </div>
+  
+      <div class="card-toolbar">
+        <button class="btn btn-lg btn-outline-dark">Add Attendance</button>
+      </div>
+    </div>
+
+    <div class="my-2">
+        {{appStatus | async}}
+    </div>
+
+    <div class="card-body">
+        <div class="form form-label-right">
+          <div class="form-group row">
+            
+            
+            <div class="col-3">
+                <label>Employee Name</label>
+                <input type="text" class="form-control" name="empname" [(ngModel)]="empname"/>
+            </div>
+          
+            <div class="col-3">
+                <label>From Month</label>
+                <input type="date" class="form-control" name="fromMonth" [(ngModel)]="fromMonth"/>
+            </div>
+
+            <div class="col-3">
+                <label>To Month</label>
+                <input type="date" class="form-control" name="toMonth" [(ngModel)]="toMonth"/>
+            </div>
+
+            <div class="col-3 mt-6">
+                <button class="btn btn-lg btn-outline-dark" (click)=newlist() >Search</button>
+            </div>
+
+        </div>
+        </div>
+        <div class="table-responsive angular-bootstrap-table mt-5">
+            <table class="table table-vertical-center overflow-hidden">
+              <thead>
+                
+                <th>DATE</th>
+                <th>CARD NO.</th>
+                <th>STATUS</th>
+                <th>START TIME</th>
+                <th>IN TIME</th>
+                <th>OUT TIME</th>
+                <th>HOURS WORKED</th>
+                <th>END TIME</th>
+
+              </thead>
+              <tbody>
+                <tr *ngFor="let dataItem of AttendanceList">
+                  <td>{{ dataItem.PunchDate.toString().substr(0,10) }}</td>
+                  <td>{{ dataItem.AttendanceCardNo }}</td>
+                  <td>{{ dataItem.MusterStatus_Actual }}</td>
+                  <td>{{ dataItem.StartTime1 }}</td>
+                  <td>{{ dataItem.InDTM1_ }}</td>
+                  <td>{{ dataItem.OutDTM1_ }}</td>
+                  <td>{{ dataItem.WorkingHrs1_ }}</td>
+                  <td>{{ dataItem.EndTime1 }}</td>
+
+                </tr>
+              </tbody>
+            </table>
+          </div>
+    </div>
+</div> -->
+
+
+
+
+
+
+<ng-template #mymodal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">{{ModalTitle}}</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+       ×
+      </button>
+    </div>
+    <div class="modal-body">
+        <!-- <app-edit-contact-d></app-edit-contact-d> -->
+        hello
+    </div>
+  </ng-template>
+  
+  
+  <div class="card card-custom gutter-b">
+    <div class="card-header">
+      <div class="card-title">
+        <h3 class="card-label">Monthly Attendance Information</h3>
+      </div>
+  
+      <div class="card-toolbar">
+        <button class="btn btn-lg btn-outline-dark" (click)="open(mymodal)">Add Attendance</button>
+      </div>
+    </div>
+  
+    <div class="my-2">
+        {{appStatus | async}}
+    </div>
+  
+    <div class="card-body">
+        <div class="form form-label-right">
+          <div class="form-group row">
+            
+            
+            <div class="col-3">
+              <label><b>Search by Name</b></label>
+              <input type="text" class="form-control" name="searchText" [(ngModel)]="searchText" (input)="searchEmployee()" placeholder="Search" value="" />
+            </div>
+          
+            <div class="col-3">
+                <label>From Month</label>
+                <input type="date" class="form-control" name="fromMonth" [(ngModel)]="fromMonth"/>
+            </div>
+  
+            <div class="col-3">
+                <label>To Month</label>
+                <input type="date" class="form-control" name="toMonth" [(ngModel)]="toMonth"/>
+            </div>
+  
+            <div class="col-1 mt-6">
+                <button class="btn btn-lg btn-outline-dark" (click)=afterSearchDateWise() >Search</button>
+            </div>
+  
+            <div class="col-2 mt-6">
+              <button class="btn btn-lg btn-outline-dark" (click)=refreshAttendanceListall() >Refresh</button>
+            </div>
+  
+        </div>
+        </div>
+        <div class="table-responsive angular-bootstrap-table mt-5">
+            <table class="table table-vertical-center overflow-hidden">
+              <thead>
+                <th>EMPLOYEE NAME</th>
+                <TH>DEPARTMENT NAME</TH>
+                <th>DATE</th>
+                <th>CARD NO.</th>
+                <th>STATUS</th>
+                <th>START TIME</th>
+                <th>IN TIME</th>
+                <th>OUT TIME</th>
+                <th>HOURS WORKED</th>
+                <th>END TIME</th>
+  
+              </thead>
+              <tbody>
+                <tr *ngFor="let dataItem of AttendanceList">
+                  <td>{{ dataItem.EmpName }}</td>
+                  <td>{{ dataItem.DeptName }}</td>
+                  <td>{{ dataItem.PunchDate.toString().substr(0,10) }}</td>
+                  <td>{{ dataItem.AttendanceCardNo }}</td>
+                  <td>{{ dataItem.MusterStatus_Actual }}</td>
+                  <td>{{ dataItem.StartTime1 }}</td>
+                  <td>{{ dataItem.InDTM1_ }}</td>
+                  <td>{{ dataItem.OutDTM1_ }}</td>
+                  <td>{{ dataItem.WorkingHrs1_ }}</td>
+                  <td>{{ dataItem.EndTime1 }}</td>
+  
+                </tr>
+              </tbody>
+            </table>
+          </div>
+    </div>
+  </div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

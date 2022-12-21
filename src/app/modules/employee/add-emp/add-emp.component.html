@@ -1,0 +1,321 @@
+<body>
+    <form novalidate #userForm="ngForm">
+        <div class="container-fluid">
+            <div class="row">
+                
+                <div class="col-12">
+                    <p class="h1">Personal Info</p>
+                </div>
+
+                <div class="col-9">
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-2">Emp ID</label>
+                        <div class="col-sm-4">
+                            <input type="text" #eid="ngModel" class="form-control" name="eid" [class.is-invalid]="eid.invalid && eid.touched" required [(ngModel)]="empModel.eid" placeholder="Emp ID">
+                            <small class="text-danger" [class.d-none]="eid.valid || eid.untouched">Employee ID is required</small>
+                        </div>
+
+                        <label class="col-form-label col-sm-2">Emp Name</label>
+                        <div class="col-sm-4">
+                            <input type="text" #ename="ngModel" class="form-control" name="ename" [class.is-invalid]="ename.invalid && ename.touched" required [(ngModel)]="empModel.ename" placeholder="Emp Name">
+                            <small class="text-danger" [class.d-none]="ename.valid || ename.untouched">Employee Name is required</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-2">DOB</label>
+                        <div class="col-sm-4">
+                            <input type="date" #dob="ngModel" class="form-control" name="dob" [class.is-invalid]="dob.invalid && dob.touched" required [(ngModel)]="empModel.dob">
+                            <small class="text-danger" [class.d-none]="dob.valid || dob.untouched">DOB is required</small>
+                        </div>
+
+                        <label class="col-form-label col-sm-2">Gender</label>
+                        <div class="col-sm-4">
+                            <select (blur)="validateGender(gender.value)" (change)="validateGender(gender.value)" class="form-control" #gender="ngModel" [class.is-invalid]="gcheck && gender.touched" [(ngModel)]="empModel.gender" name="gender">
+                                <option value="default">--Select--</option>
+                                <option *ngFor="let Gender of Genders">{{ Gender }}</option>
+                            </select>
+                            <small class="text-danger" [class.d-none]="!gcheck || gender.untouched">Please select a Gender</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-2">Department</label>
+                        <div class="col-sm-4">
+                            <!-- <select class="form-control" name="department" *ngFor="let depName of dept">
+                                <option [(ngModel)]="department">{{depName.DeptName}}</option>
+                            </select> -->
+                            <select class="form-control" [(ngModel)]="department" name="department">
+                                <option>--Select--</option>
+                                <option *ngFor="let depName of dept">
+                                    {{depName.DeptName}}
+                                </option>
+                            </select>
+                        </div>
+                        
+                        <label class="col-form-label col-sm-2">Blood Group</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" name="bgrp" [(ngModel)]="bgrp">
+                                <option>--Select--</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-2">Category</label>
+                        <div class="col-sm-4">
+                            <input type="text" #category="ngModel" class="form-control" name="category" [class.is-invalid]="category.invalid && category.touched" required [(ngModel)]="empModel.category" placeholder="Category">
+                            <small class="text-danger" [class.d-none]="category.valid || category.untouched">Category is required</small>
+                        </div>
+
+                        <label class="col-form-label col-sm-2">Designation</label>
+                        <div class="col-sm-4">
+                            <input type="text" #designation="ngModel" class="form-control" name="designation" [class.is-invalid]="designation.invalid && designation.touched" required [(ngModel)]="empModel.designation" placeholder="Designation">
+                            <small class="text-danger" [class.d-none]="designation.valid || designation.untouched">Designation is required</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-2">User</label>
+                        <div class="col-sm-4">
+                            <input type="text" #euser="ngModel" class="form-control" name="euser" [class.is-invalid]="euser.invalid && euser.touched" required [(ngModel)]="empModel.euser" placeholder="Employee User">
+                            <small class="text-danger" [class.d-none]="euser.valid || euser.untouched">User is required</small>
+                        </div>
+    
+                        <label class="col-form-label col-sm-2">Password</label>
+                        <div class="col-sm-4">
+                            <input type="text" #epwd="ngModel" class="form-control" name="epwd" [class.is-invalid]="epwd.invalid && epwd.touched" required [(ngModel)]="empModel.epwd" placeholder="Employee Password">
+                            <small class="text-danger" [class.d-none]="epwd.valid || epwd.untouched">Password is required</small>
+                        </div>
+                    </div>
+                </div>
+
+                
+            
+
+                <div class="col-3">
+                    <div class="bd-highlight ml-5" style="width: 40%;">
+                        <img [src]="PhotoFilePath" height="200px" width="200px">
+                        <input type="file" class="" (change)="uploadPhoto($event)"/>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="h1">Contact Details</p>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-2">Line1</label>
+                        <div class="col-sm-4">
+                            <input type="text" #line1="ngModel" class="form-control" name="line1" [class.is-invalid]="line1.invalid && line1.touched" required [(ngModel)]="contactModel.line1" placeholder="Apt/Soc">
+                            <small class="text-danger" [class.d-none]="line1.valid || line1.untouched">Address 1 is required</small>
+                        </div>
+
+                        <label class="col-form-label col-sm-2">Line2</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="line2" [(ngModel)]="line2" placeholder="Street Name">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-2">City</label>
+                        <div class="col-sm-4">
+                            <input type="text" #city="ngModel" class="form-control" name="city" [class.is-invalid]="city.invalid && city.touched" required [(ngModel)]="contactModel.city" placeholder="City">
+                            <small class="text-danger" [class.d-none]="city.valid || city.untouched">City is required</small>
+                        </div>
+
+                        <label class="col-form-label col-sm-2">State</label>
+                        <div class="col-sm-4">
+                            <input type="text" #state="ngModel" class="form-control" name="state" [class.is-invalid]="state.invalid && state.touched" required [(ngModel)]="contactModel.state" placeholder="State">
+                            <small class="text-danger" [class.d-none]="state.valid || state.untouched">State is required</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-2">Country</label>
+                        <div class="col-sm-4">
+                            <input type="text" #country="ngModel" class="form-control" name="country" [class.is-invalid]="country.invalid && country.touched" required [(ngModel)]="contactModel.country" placeholder="Country">
+                            <small class="text-danger" [class.d-none]="country.valid || country.untouched">Country is required</small>
+                        </div>
+
+                        <label class="col-form-label col-sm-2">Mobile No</label>
+                        <div class="col-sm-4">
+                            <input type="text" #mobno="ngModel" class="form-control" name="mobno" [class.is-invalid]="mobno.invalid && mobno.touched" required [(ngModel)]="contactModel.mobno" placeholder="Mobile No.">
+                            <small class="text-danger" [class.d-none]="mobno.valid || mobno.untouched">Mobile number is required</small>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="col-12">
+                    <p class="h1">Experience Details</p>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-2">SrNo</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="srno" [(ngModel)]="srno" placeholder="Sr No.">
+                        </div>
+
+                        <label class="col-form-label col-sm-2">DOJ</label>
+                        <div class="col-sm-4">
+                            <input type="date" class="form-control" name="doj" [(ngModel)]="doj">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-2">DOL</label>
+                        <div class="col-sm-4">
+                            <input type="date" class="form-control" name="dol" [(ngModel)]="dol">
+                        </div>
+
+                        <label class="col-form-label col-sm-2">ExpMon</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="expmon" [(ngModel)]="expmon" placeholder="Experience Month">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-12">
+                    <p class="h1">Educational Details</p>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-2">Degree</label>
+                        <div class="col-sm-4">
+                            <input type="text" #degree="ngModel" class="form-control" name="degree" [class.is-invalid]="degree.invalid && degree.touched" required [(ngModel)]="eduModel.degree" placeholder="Degree">
+                            <small class="text-danger" [class.d-none]="mobno.valid || mobno.untouched">Degree is required</small>
+                        </div>
+
+                        <label class="col-form-label col-sm-2">Subject</label>
+                        <div class="col-sm-4">
+                            <input type="text" #sub="ngModel" class="form-control" name="sub" [class.is-invalid]="sub.invalid && sub.touched" required [(ngModel)]="eduModel.sub" placeholder="Subject">
+                            <small class="text-danger" [class.d-none]="mobno.valid || mobno.untouched">Subject is required</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-2">Class</label>
+                        <div class="col-sm-4">
+                            <input type="text" #class1="ngModel" class="form-control" name="class1" [class.is-invalid]="class1.invalid && class1.touched" required [(ngModel)]="eduModel.class1" placeholder="Class">
+                            <small class="text-danger" [class.d-none]="mobno.valid || mobno.untouched">Class is required</small>
+                        </div>
+
+                        <label class="col-form-label col-sm-2">Year</label>
+                        <div class="col-sm-4">
+                            <input type="text" #year="ngModel" class="form-control" name="year" [class.is-invalid]="year.invalid && year.touched" required [(ngModel)]="eduModel.year" placeholder="Year">
+                            <small class="text-danger" [class.d-none]="mobno.valid || mobno.untouched">Year is required</small>
+                        </div>
+                    </div>
+                    
+                </div>
+
+
+    <ng-template #mymodal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{ModalTitle}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <app-add-family [empid]="empid"></app-add-family>
+        <!-- This is example from ItSolutionStuff.com -->
+    </div>
+    <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+    </div> -->
+    </ng-template>
+
+    <ng-template #mymodal2 let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">{{ModalTitle}}</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <app-add-salary [empid]="empid"></app-add-salary>
+            <!-- This is example from ItSolutionStuff.com -->
+        </div>
+        <!-- <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+        </div> -->
+        </ng-template>
+
+                <div class="col-12">
+                    <p class="h1">Family Details</p>
+
+                    <div class="table-responsive angular-bootstrap-table">
+                        <table class="table table-vertical-center overflow-hidden">
+                          <thead>
+                            
+                            <th>MEMBER NAME</th>
+                            <th>DOB</th>
+                            <th>RELATION</th>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let dataItem of FamilyList">
+                              <td>{{ dataItem.MemberName }}</td>
+                              <td>{{ dataItem.DOB }}</td>
+                              <td>{{ dataItem.RelationWithEmp }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+
+                      <button (click)="addFamily(mymodal)" class="btn btn-outline-dark">
+                        Add
+                    </button>
+                </div>
+
+                <!-- <div class="col-12">
+                    <p class="h1">Salary Details</p>
+
+                    <div class="table-responsive angular-bootstrap-table">
+                        <table class="table table-vertical-center overflow-hidden">
+                          <thead>
+                            
+                            <th>BASIC</th>
+                            <th>HRA</th>
+                            <th>TOTAL GROSS</th>
+                            <th>DATE</th>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let dataItem of SalaryList">
+                              <td>{{ dataItem.Basic }}</td>
+                              <td>{{ dataItem.HRA }}</td>
+                              <td>{{ dataItem.TotalGross_Master }}</td>
+                              <td>{{ dataItem.RecordType }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+
+                      <button (click)="addSalary(mymodal2)" class="btn btn-outline-dark">
+                        Add
+                    </button>
+                </div> -->
+
+                <div class="">
+                    <button (click)="addEmployee()" [disabled]="userForm.form.invalid || gcheck" class="btn btn-outline-dark">
+                        Add Employee
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>

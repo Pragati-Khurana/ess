@@ -1,0 +1,106 @@
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{ModalTitle}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-add-emp></app-add-emp>
+  </div>
+</ng-template>
+
+<ng-template #mymodal2 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{ModalTitle}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      x
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-edit-emp [emp]="emp"></app-edit-emp>
+    <!-- <app-emp-add-edit [emp]="emp"></app-emp-add-edit> -->
+    <!-- This is example from ItSolutionStuff.com -->
+  </div>
+  <!-- <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+  </div> -->
+</ng-template>
+
+<div class="card card-custom gutter-b">
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">Employee list</h3>
+    </div>
+
+    <div class="card-toolbar">
+      <button class="btn btn-lg btn-outline-dark" (click)="open(mymodal)">New Employee</button>
+      <!-- <button type="button" class="btn btn-primary">New Employee</button> -->
+    </div>
+  </div>
+
+  <div class="my-2">
+    {{appStatus | async}}
+  </div>
+  
+  <div class="card-body">
+    <div class="form form-label-right">
+      <div class="form-group row">
+        
+        
+        <div class="col-3">
+          <input type="text" class="form-control" name="searchText" [(ngModel)]="searchText" (input)="searchEmployee()" placeholder="Search" value="" /><small class="form-text text-muted"><b>Search</b> by Name</small>
+        </div>
+        
+        
+        <div class="col-3">
+          <select class="form-control" name="gender" [(ngModel)]="gender" (change)="filter($event.target.value)" placeholder="Filter by Gender" formControlName="gender">
+            <option value="ALL">All</option>
+            <option value="MALE">Male</option>
+            <option value="FEMALE">Female</option>
+          </select><small class="form-text text-muted"><b>Filter</b> by Gender</small>
+        </div>
+      
+
+      </div>
+    </div>
+    
+    <div class="table-responsive angular-bootstrap-table">
+      <table class="table table-vertical-center overflow-hidden">
+        <thead>
+          
+          <th>EMP NAME</th>
+          <th>GENDER </th>
+          <th>DEPARTMENT</th>
+          <th>CATEGORY</th>
+          <th>DESIGNATION</th>
+          <th>ACTIONS</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let dataItem of EmployeeList">
+            <td (click)="changePage(dataItem.EmpId)">{{ dataItem.EmpName }}</td>
+            <td (click)="changePage(dataItem.EmpId)">{{ dataItem.Gender }}</td>
+            <td (click)="changePage(dataItem.EmpId)">{{ dataItem.DeptId }}</td>
+            <td (click)="changePage(dataItem.EmpId)">{{ dataItem.Category }}</td>
+            <td (click)="changePage(dataItem.EmpId)">{{ dataItem.Designation }}</td>
+            
+            <td>
+
+              <a title="Edit customer" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3" (click)="editClick(dataItem,mymodal2)">
+                <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
+                  class="svg-icon svg-icon-md svg-icon-primary">
+                </span>
+              </a>
+
+              <a title="Delete customer" class="btn btn-icon btn-light btn-hover-danger btn-sm" (click)="deleteClick(dataItem)">
+                <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="true"
+                  class="svg-icon svg-icon-md svg-icon-danger">
+                </span>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

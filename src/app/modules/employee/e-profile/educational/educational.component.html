@@ -1,0 +1,60 @@
+<ng-template #mymodal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">{{ModalTitle}}</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        ×
+      </button>
+    </div>
+    <div class="modal-body">
+<app-edit-educational-d></app-edit-educational-d>
+    </div>
+  </ng-template>
+
+    <div class="my-2">
+        {{appStatus | async}}
+    </div>
+    <p class="h1">Educational Details</p>
+    
+    <body>
+    <form>
+        <div class="container-fluid">
+            
+            <div class="row">
+                <div class="col-12">
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-3">Degree</label>
+                    <div class="col-sm-8">
+                        <input type="text" readonly class="form-control" name="deg" [(ngModel)]="deg" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-3">Subject</label>
+                    <div class="col-sm-8">
+                        <input type="text" readonly class="form-control" name="sub" [(ngModel)]="sub" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-3">Class</label>
+                    <div class="col-sm-8">
+                        <input type="text" readonly class="form-control" name="class" [(ngModel)]="class" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-3">Year</label>
+                    <div class="col-sm-8">
+                        <input type="text" readonly class="form-control" name="year" [(ngModel)]="year" readonly>
+                    </div>
+                </div>
+
+                <div>
+                    <button class="btn btn-lg btn-outline-dark float-right" *ngIf=(checkHead) (click)="open(mymodal)">Edit Educational Information</button>
+                </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+</body>

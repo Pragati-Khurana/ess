@@ -1,0 +1,54 @@
+<div class="my-2">
+    {{appStatus | async}}
+  </div>
+
+<body>
+    <form>
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-12 mt-5">
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-2">Employee Id</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="empid2" [(ngModel)]="empid2" placeholder="Employee Id">
+                        </div>
+
+
+                        <label class="col-form-label col-sm-2">Punch Date</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="pdate2" [(ngModel)]="pdate2" placeholder="Punch Date">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-2">Muster Status</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="mstatus2" [(ngModel)]="mstatus2" placeholder="Muster Status">
+                        </div>
+
+
+                        <label class="col-form-label col-sm-2">In Time</label>
+                        <div class="col-sm-4">
+                            <input type="datetime" class="form-control" name="itime2" [(ngModel)]="itime2" placeholder="In Time">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-2">Out Time</label>
+                        <div class="col-sm-4">
+                            <input type="datetime" class="form-control" name="otime2" [(ngModel)]="otime2" placeholder="Out Time">
+                        </div>
+                    </div>
+
+                    <div>
+                        <div>
+                            <button class="btn btn-lg btn-outline-dark float-right" (click)="updateAttendance()">Edit Attendance</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+</body>

@@ -1,0 +1,180 @@
+<div class="my-2">
+  {{appStatus | async}}
+</div>
+
+<div class="card card-custom gutter-b" *ngIf="!checkHead">
+    <div class="card-header">
+      <div class="card-title">
+        <h3 class="card-label">My Salary Information</h3>
+      </div>
+    </div>
+
+    
+
+    <div class="card-body">
+        <div class="form form-label-right">
+          <div class="form-group row"> 
+
+            <div class="col-3">
+                <label>Employee Name</label>
+                <input type="text" class="form-control" name="empname" [(ngModel)]="empname" />
+            </div>
+          
+            <div class="col-3">
+                <label>From Date</label>
+                <input type="date" class="form-control" name="fromdate" [(ngModel)]="fromdate"/>
+            </div>
+    
+            <div class="col-3">
+                <label>To Date</label>
+                <input type="date" class="form-control" name="todate" [(ngModel)]="todate"/>
+            </div>
+
+            <div class="col-1 mt-6">
+                <button class="btn btn-lg btn-outline-dark" (click)="newlist()">Search</button>
+            </div>
+
+            <div class="col-2 mt-6">
+                <button class="btn btn-lg btn-outline-dark" (click)="refreshSalaryList()">Refresh</button>
+            </div>
+
+        </div>
+        </div>
+        <div class="table-responsive angular-bootstrap-table mt-5">
+            <table class="table table-vertical-center overflow-hidden">
+              <thead>
+                
+                <th>MONYEAR</th>
+                <th>DESIGNATION</th>
+                <th>DEPARTMENT NAME</th>
+                <th>BASIC</th>
+                <th>HRA</th>
+                <th>TRAN ALLW</th>
+                <th>WASHING ALLW</th>
+                <th>SPECIAL ALLW</th>
+                <th>EDU ALLW</th>
+                <th>TOTAL GROSS</th>
+                <th>WEEKLY OFF</th>
+                <th>WORKING DAYS</th>
+
+              </thead>
+              <tbody>
+                <tr *ngFor="let dataItem of SalaryList">
+                  <td>{{ dataItem.MonYear }}</td>
+                  <td>{{ dataItem.Designation }}</td>
+                  <td>{{ dataItem.DeptName }}</td>
+                  <td>{{ dataItem.Basic_Master }}</td>
+                  <td>{{ dataItem.HRA_Master }}</td>
+                  <td>{{ dataItem.TranAllw_Master }}</td>
+                  <td>{{ dataItem.WashingAllw_Master }}</td>
+                  <td>{{ dataItem.SpecialAllw_Master }}</td>
+                  <td>{{ dataItem.EduAllw_Master }}</td>
+                  <td>{{ dataItem.TotalGross_Master }}</td>
+                  <td>{{ dataItem.WeeklyOffDays }}</td>
+                  <td>{{ dataItem.WorkingDays }}</td>
+
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+    </div>
+</div> 
+
+
+
+
+
+
+
+<div class="my-2">
+  {{appStatus | async}}
+</div>
+
+
+
+<div class="card card-custom gutter-b" *ngIf="checkHead">
+    <div class="card-header">
+      <div class="card-title">
+        <h3 class="card-label">Salary Information</h3>
+      </div>
+    </div>
+
+    
+
+    <div class="card-body">
+        <div class="form form-label-right">
+          <div class="form-group row"> 
+            
+            <div class="col-3">
+              <label><b>Search by Name</b></label>
+              <input type="text" class="form-control" name="searchText" [(ngModel)]="searchText" (input)="searchEmployee()" placeholder="Search" value="" />
+            </div>
+
+            <div class="col-3">
+                <label>From Date</label>
+                <input type="date" class="form-control" name="fromdate" [(ngModel)]="fromdate"/>
+            </div>
+    
+            <div class="col-3">
+                <label>To Date</label>
+                <input type="date" class="form-control" name="todate" [(ngModel)]="todate"/>
+            </div>
+
+            <div class="col-1 mt-6">
+                <button class="btn btn-lg btn-outline-dark" (click)="afterSearchSalaryDateWise()">Search</button>
+            </div>
+
+            <div class="col-2 mt-6">
+              <button class="btn btn-lg btn-outline-dark" (click)="refreshSalaryListall()">Refresh</button>
+            </div>
+
+            <!-- <div class="mt-6">
+              <button class="btn btn-lg btn-outline-dark">Download PDF</button>
+            </div> -->
+
+        </div>
+        </div>
+        <div class="table-responsive angular-bootstrap-table mt-5">
+            <table class="table table-vertical-center overflow-hidden">
+              <thead>
+                <th>EMPLOYEE NAME</th>
+                <th>MONYEAR</th>
+                <th>DESIGNATION</th>
+                <th>DEPARTMENT NAME</th>
+                <th>BASIC</th>
+                <th>HRA</th>
+                <th>TRAN ALLW</th>
+                <th>WASHING ALLW</th>
+                <th>SPECIAL ALLW</th>
+                <th>EDU ALLW</th>
+                <th>TOTAL GROSS</th>
+                <th>WEEKLY OFF</th>
+                <th>WORKING DAYS</th>
+
+              </thead>
+              <tbody>
+                <tr *ngFor="let dataItem of SalaryList">
+                  <td>{{ dataItem.EmpName }}</td>
+                  <td>{{ dataItem.MonYear }}</td>
+                  <td>{{ dataItem.Designation }}</td>
+                  <td>{{ dataItem.DeptName }}</td>
+                  <td>{{ dataItem.Basic_Master }}</td>
+                  <td>{{ dataItem.HRA_Master }}</td>
+                  <td>{{ dataItem.TranAllw_Master }}</td>
+                  <td>{{ dataItem.WashingAllw_Master }}</td>
+                  <td>{{ dataItem.SpecialAllw_Master }}</td>
+                  <td>{{ dataItem.EduAllw_Master }}</td>
+                  <td>{{ dataItem.TotalGross_Master }}</td>
+                  <td>{{ dataItem.WeeklyOffDays }}</td>
+                  <td>{{ dataItem.WorkingDays }}</td>
+
+          
+
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+    </div>
+</div>

@@ -1,0 +1,44 @@
+<body>
+    <form>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <p class="h1">Educational Details</p>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-2">Degree</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="degree" [(ngModel)]="deg" placeholder="Degree">
+                        </div>
+
+                        <label class="col-form-label col-sm-2">Subject</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="sub" [(ngModel)]="sub" placeholder="Subject">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-2">Class</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="class" [(ngModel)]="class" placeholder="Class">
+                        </div>
+
+                        <label class="col-form-label col-sm-2">Year</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="year" [(ngModel)]="year" placeholder="Year">
+                        </div>
+                    </div>
+
+                    <div>
+                        <button (click)="updateEmployee()" class="btn btn-outline-dark float-right">
+                            Edit Educational Information
+                        </button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </form>
+</body>

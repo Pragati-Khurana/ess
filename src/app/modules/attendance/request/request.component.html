@@ -1,0 +1,52 @@
+<body>
+    <div class="my-2">
+        {{appStatus | async}}
+    </div>
+
+<div class="card card-custom gutter-b">
+    <div class="card-header">
+        <div class="card-title">
+        <h3 class="card-label">Attendance Requests</h3>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive angular-bootstrap-table">
+            <table class="table table-vertical-center overflow-hidden">
+              <thead>
+                
+                <th>Employee Name</th>
+                <th>Attendance Card Number</th>
+                <th>Punch Date</th>
+                <th>Muster Status</th>
+                <th>In Time</th>
+                <th>Out Time</th>
+                <th>Actions</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of tempList">
+                  <td>{{ item.ename }}</td>
+                  <td>{{ item.acardno }}</td>
+                  <td>{{ item.pdate }}</td>
+                  <td>{{ item.mstatus }}</td>
+                  <td>{{ item.intime }}</td>
+                  <td>{{ item.outtime }}</td>
+                  <td>
+
+                    <a title="Approve Request" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3" (click)="addMuster(item)">
+                        <span [inlineSVG]="'./assets/media/svg/icons/myIcons/checked.svg'" cacheSVG="true"
+                        class="svg-icon svg-icon-md svg-icon-primary">
+                        </span>
+                    </a>
+      
+                    <a title="Decline Request" class="btn btn-icon btn-light btn-hover-danger btn-sm" (click)="deleteMuster(item)">
+                        <span [inlineSVG]="'./assets/media/svg/icons/myIcons/cancel.svg'" cacheSVG="true"
+                        class="svg-icon svg-icon-md svg-icon-danger">
+                        </span>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+    </div>
+</div>    

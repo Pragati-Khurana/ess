@@ -1,0 +1,45 @@
+<body>
+    <form>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <p class="h1">Experience Details</p>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-2">SrNo</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="srno" [(ngModel)]="srno" placeholder="Sr No.">
+                        </div>
+
+                        <label class="col-form-label col-sm-2">DOJ</label>
+                        <div class="col-sm-4">
+                            <input type="date" class="form-control" name="doj" [(ngModel)]="doj">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-2">DOL</label>
+                        <div class="col-sm-4">
+                            <input type="date" class="form-control" name="dol" [(ngModel)]="dol">
+                        </div>
+
+                        <label class="col-form-label col-sm-2">ExpMon</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="expmon" [(ngModel)]="expmon" placeholder="Experience Month">
+                        </div>
+                    </div>
+
+                    <div>
+                        <button (click)="updateEmployee()" class="btn btn-outline-dark float-right">
+                            Edit Experience Information
+                        </button>
+                    </div>
+                    
+                </div>
+
+            </div>
+        </div>
+    </form>
+</body>

@@ -1,0 +1,291 @@
+<html>
+    <body>
+        <div class="my-2">
+            {{appStatus | async}}
+          </div>
+        <div class="fluid-container" *ngIf="checkHead">
+            <div class="row">
+                <div class="col-3">
+                    <div class="card bg-info text-white">
+                        <div class="card-body">
+                          <h5 class="card-title">{{count}}</h5>
+                          <h6 class="card-subtitle mb-2"><b>Total Employee</b></h6>
+                        </div>
+                        <div class="card-footer bg-dark">
+                            <a routerLink="/employee/display" class="link1">Another link</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-3">
+                    <div class="card bg-success text-white">
+                        <div class="card-body">
+                          <h5 class="card-title">{{countLeave}}</h5>
+                          <h6 class="card-subtitle mb-2"><b>Leave to Approve</b></h6>
+                        </div>
+                        <div class="card-footer bg-dark">
+                            <a href="/leave/requestLeave" class="link1">View All</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-3">
+                    <div class="card bg-danger text-white">
+                        <div class="card-body">
+                          <h5 class="card-title">{{countAttendance}}</h5>
+                          <h6 class="card-subtitle mb-2"><b>Attendance to Approve</b></h6>
+                        </div>
+                        <div class="card-footer bg-dark">
+                            <a href="/attandance/pendingRequest" class="link1">View All</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-3">
+                    <div class="card bg-primary text-white">
+                        <div class="card-body">
+                          <h5 class="card-title">1st April {{yr}} to 31st March {{yr}}</h5>
+                          <h6 class="card-subtitle mb-2"><b>Financial Year</b></h6>
+                        </div>
+                        <div class="card-footer bg-dark">
+                            <a href="#" class="link1"></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-5">
+
+                    <div class="card bg-warning text-white">
+                        <div class="card-body">
+                            <div class="card-title">
+                                <h3>Birthday Today</h3>
+                            </div>
+                            <img class="card-img-top" [src]="PhotoFilePath" height="300px" width="70px" alt="Card image cap">
+                            <div class="bg-light text-dark bd pt-2 pb-2">
+                                {{bday}}
+                            </div>
+                        </div>
+                      </div>
+                </div>
+
+                <div class="col-7">
+
+                    <div class="chart-wrapper">
+                        <canvas baseChart 
+                        [data]="[[perF,perM]]"
+                        [labels]="doughnutChartLabels"
+                        [colors]="chartColors()"
+                        [chartType]="doughnutChartType">
+                      </canvas>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-12">
+                    <ngb-accordion #acc="ngbAccordion">
+                        <ngb-panel id="toggle-1" title="Why Sunrise Payroll Managment?">
+                          <ng-template ngbPanelContent>
+                            Sunrise Software Development has designed and developed ideal software solution for Attendance and Payroll Management. It is super easy to learn, user friendly to operate and powerful in performance.
+                            Attendance and Payroll Management software covers all activities and transactions of timeoffice and human resource department to give you desired result in time.
+                            Our software solution is broadly accepted by businesses and being used by hundreds of smart HR professionals to manage their work in a smart, efficient and easy way. We also provide full support during complete software implementation life cycle.
+                          </ng-template>
+                        </ngb-panel>
+                        <ngb-panel id="toggle-2" title="Features & Modules">
+                          <ng-template ngbPanelContent>
+                            <h3>Company Master</h3>
+                            Allows you to define & manage multiple companies and its essential information from a single interface.
+                            <br><br>
+                            <h3>Department Master</h3>
+                            To manage company wise department list.
+                            <br><br>
+                            <h3>Employee Master</h3>
+                            A well structured employee master form allows you to manage and access complete details of your employee in easiest manner.
+                            <br><br>
+                            <h3>Leave Master</h3>
+                            To manage leaves and leave policy.
+                            <br><br>
+                            <h3>Loan/Advance Master</h3>
+                            Now itâ€™s easy to manage loans and advances given to the employees. You can activate or deactivate loans exclusively too.
+                          </ng-template>
+                        </ngb-panel>
+                        <ngb-panel id="toggle-3" title="TRANSACTIONS / ENTRIES">
+                            <ng-template ngbPanelContent>
+                                <h3>Automatic Punch Process</h3>
+                                To fetch punching data from attendance devices (RFID, Fingerprint, Face Reader, etc.) and process it into payroll software as per your timeoffice policies automatically. We make best possible integration between payroll software and attendance devices.
+                                <br><br>
+                                <h3>Manual Punch Process</h3>
+                                This module allows you to upload punching data from excel and enter manually as well in case of unavailability of attendance machine.
+                                <br><br>
+                                <h3>Leave Entry</h3>
+                                Leave and tour application module is designed to record employee leaves. It makes leave management task too easy.
+                            </ng-template>
+                          </ngb-panel>
+                      </ngb-accordion>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-12">
+                    <div class="chart-wrapper">
+                        <canvas baseChart 
+                        [datasets]="barChartData"
+                        [labels]="barChartLabels"
+                        [colors]="chartColors2()"
+                        [options]="barChartOptions"
+                        [plugins]="barChartPlugins"
+                        [legend]="barChartLegend"
+                        [chartType]="barChartType">
+                      </canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="fluid-container" *ngIf="!checkHead">
+            <div class="row">
+                <div class="col-3">
+                    <div class="card bg-info text-white">
+                        <div class="card-body">
+                          <h5 class="card-title">{{ avaLeave }}</h5>
+                          <h6 class="card-subtitle mb-2"><b>Available Leave</b></h6>
+                        </div>
+                        <div class="card-footer bg-dark">
+                            <a routerLink="/leave/requestLeave" class="link1">Apply For Leave</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-3">
+                    <div class="card bg-success text-white">
+                        <div class="card-body">
+                          <h5 class="card-title">{{ weeklyoff }}</h5>
+                          <h6 class="card-subtitle mb-2"><b>Weekly Off</b></h6>
+                        </div>
+                        <div class="card-footer bg-dark">
+                            <a href="#" class="link1">Another link</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <!-- <div class="card bg-danger\">
+                        <div class="card-header">
+                            <h6><b>Upcoming Holidays</b></h6>
+                        </div>
+                        <div class="card-body">
+                          <h5 class="card-title"></h5>
+                          
+                        </div>
+                        <div class="card-footer bg-dark">
+                            <a href="#" class="link1"></a>
+                        </div>
+                    </div> -->
+                    <div class="card bg-primary text-white">
+                        <div class="card-body">
+                          <h5 class="card-title">1st April {{yr}} to 31st March {{yr}}</h5>
+                          <h6 class="card-subtitle mb-2"><b>Financial Year</b></h6>
+                        </div>
+                        <div class="card-footer bg-dark">
+                            <a href="#" class="link1"></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-5">
+
+                    <div class="card bg-warning text-white">
+                        <div class="card-body">
+                            <div class="card-title">
+                                <h3>Birthday Today</h3>
+                            </div>
+                            <img class="card-img-top" [src]="PhotoFilePath" height="300px" width="70px" alt="Card image cap">
+                            <div class="bg-light text-dark bd pt-2 pb-2">
+                                {{bday}}
+                            </div>
+                        </div>
+                      </div>
+                </div>
+
+                <div class="col-7">
+
+                    <div class="chart-wrapper">
+                        <canvas baseChart 
+                        [data]="[[perF,perM]]"
+                        [labels]="doughnutChartLabels"
+                        [colors]="chartColors()"
+                        [chartType]="doughnutChartType">
+                      </canvas>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-12">
+                    <ngb-accordion #acc="ngbAccordion">
+                        <ngb-panel id="toggle-1" title="Why Sunrise Payroll Managment?">
+                          <ng-template ngbPanelContent>
+                            Sunrise Software Development has designed and developed ideal software solution for Attendance and Payroll Management. It is super easy to learn, user friendly to operate and powerful in performance.
+                            Attendance and Payroll Management software covers all activities and transactions of timeoffice and human resource department to give you desired result in time.
+                            Our software solution is broadly accepted by businesses and being used by hundreds of smart HR professionals to manage their work in a smart, efficient and easy way. We also provide full support during complete software implementation life cycle.
+                          </ng-template>
+                        </ngb-panel>
+                        <ngb-panel id="toggle-2" title="Features & Modules">
+                          <ng-template ngbPanelContent>
+                            <h3>Company Master</h3>
+                            Allows you to define & manage multiple companies and its essential information from a single interface.
+                            <br><br>
+                            <h3>Department Master</h3>
+                            To manage company wise department list.
+                            <br><br>
+                            <h3>Employee Master</h3>
+                            A well structured employee master form allows you to manage and access complete details of your employee in easiest manner.
+                            <br><br>
+                            <h3>Leave Master</h3>
+                            To manage leaves and leave policy.
+                            <br><br>
+                            <h3>Loan/Advance Master</h3>
+                            Now itâ€™s easy to manage loans and advances given to the employees. You can activate or deactivate loans exclusively too.
+                          </ng-template>
+                        </ngb-panel>
+                        <ngb-panel id="toggle-3" title="TRANSACTIONS / ENTRIES">
+                            <ng-template ngbPanelContent>
+                                <h3>Automatic Punch Process</h3>
+                                To fetch punching data from attendance devices (RFID, Fingerprint, Face Reader, etc.) and process it into payroll software as per your timeoffice policies automatically. We make best possible integration between payroll software and attendance devices.
+                                <br><br>
+                                <h3>Manual Punch Process</h3>
+                                This module allows you to upload punching data from excel and enter manually as well in case of unavailability of attendance machine.
+                                <br><br>
+                                <h3>Leave Entry</h3>
+                                Leave and tour application module is designed to record employee leaves. It makes leave management task too easy.
+                            </ng-template>
+                          </ngb-panel>
+                      </ngb-accordion>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12">
+                    <div class="chart-wrapper">
+                        <canvas baseChart 
+                        [datasets]="barChartData"
+                        [labels]="barChartLabels"
+                        [colors]="chartColors2()"
+                        [options]="barChartOptions"
+                        [plugins]="barChartPlugins"
+                        [legend]="barChartLegend"
+                        [chartType]="barChartType">
+                      </canvas>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </body>
+</html>

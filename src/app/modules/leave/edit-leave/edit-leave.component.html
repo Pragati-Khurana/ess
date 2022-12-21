@@ -1,0 +1,110 @@
+<body>
+    <div class="my-2">
+        {{appStatus | async}}
+    </div>
+
+<div class="card card-custom gutter-b">
+    <div class="card-header">
+        <div class="card-title">
+        <h3 class="card-label">Leave Requests</h3>
+        </div>
+    
+    </div>
+<div class="card-body">     
+    <form>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-3"> 
+                </div>
+                
+                <div class="col-6">
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-3">Application Date</label>
+                        <div class="col-sm-8">
+                            <input type="text" readonly class="form-control" name="edate" [(ngModel)]="edate" readonly>
+                            
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-3">Employee Name</label>
+                        <div class="col-sm-8">
+                            <input type="text" readonly name="ename" class="form-control" [(ngModel)]="ename">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">                    
+                        <label class="col-form-label col-sm-3">From Date</label>
+                        <div class="col-sm-8">
+                            <input type="date" class="form-control" name="fdate" [(ngModel)]="fdate">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">                    
+                        <label class="col-form-label col-sm-3">To Date</label>
+                        <div class="col-sm-8">
+                            <input type="date" class="form-control" name="tdate" [(ngModel)]="tdate">
+                        </div>
+                    </div>
+                    
+
+                    <!-- <div class="form-group row">
+                        <label class="col-form-label col-sm-3">Leave Type</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="leavetype" [(ngModel)]="leavetype">
+                        </div>
+                    </div> -->
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-3">Leave Type</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" [(ngModel)]="leavetype" name="leavetype">
+                                <option>--Select--</option>
+                                <option *ngFor="let leave of leaves">
+                                    {{leave.LeaveName}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-3">Remarks</label>
+                        <div class="col-sm-8">
+                            <!-- <input type="text" class="form-control" name="remarks" [(ngModel)]="remarks"> -->
+                            <textarea rows="5" class="form-control" name="remarks" [(ngModel)]="remarks"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-3">Is Aprroved</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="isapp" [(ngModel)]="isapp">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-3">Is Reject</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="isrej" [(ngModel)]="isrej">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <button class="btn btn-lg btn-outline-dark float-right" (click)="editLeave()">Edit Leave Details</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-3"></div>
+
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+</body>

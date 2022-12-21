@@ -1,0 +1,229 @@
+<body>
+    <div class="my-2">
+        {{appStatus | async}}
+    </div>
+
+<div class="card card-custom gutter-b">
+    <div class="card-header">
+        <div class="card-title">
+        <h3 class="card-label">Leave Requests</h3>
+        </div>
+    
+    </div>
+<div class="card-body">     
+    <form *ngIf="!checkHead" novalidate #userForm="ngForm">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-3"> 
+                </div>
+                
+                <div class="col-6">
+                    <p class="h1">Leave Application</p>
+
+                    <div class="row">
+                        <div class="col-4">
+                        <div class="card bg-info text-white">
+                            <div class="card-body">
+                            <h5 class="card-title">{{ open }}</h5>
+                              <h6 class="card-subtitle mb-2"><b>Opening</b></h6>
+                            </div>
+                        </div>
+                        </div>
+    
+                        <div class="col-4">
+                            <div class="card bg-warning text-white">
+                                <div class="card-body">
+                                <h5 class="card-title">{{ used }}</h5>
+                                  <h6 class="card-subtitle mb-2"><b>Used</b></h6>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="col-4">
+                            <div class="card bg-success text-white">
+                                <div class="card-body">
+                                <h5 class="card-title">{{ balance }}</h5>
+                                  <h6 class="card-subtitle mb-2"><b>Balance</b></h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div><br>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-3">Entry Date</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="edate" [(ngModel)]="edate" readonly>
+                            
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-3">Employee Name</label>
+                        <div class="col-sm-8">
+                            <input type="text" name="ename" class="form-control" [(ngModel)]="ename" readonly>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">                    
+                        <label class="col-form-label col-sm-3">From Date</label>
+                        <div class="col-sm-8">
+                            <input type="date" (ngModelChange)="datechange1($event)" #fdate="ngModel" class="form-control" name="fdate" [class.is-invalid]="fdate.invalid && fdate.touched" required [(ngModel)]="leaveModel.fdate" placeholder="From Date">
+                            <small class="text-danger" [class.d-none]="fdate.valid || fdate.untouched">From Date is required</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">                    
+                        <label class="col-form-label col-sm-3">To Date</label>
+                        <div class="col-sm-8">
+                            <input type="date" (ngModelChange)="datechange2($event)" #tdate="ngModel" class="form-control" name="tdate" [class.is-invalid]="tdate.invalid && tdate.touched" required [(ngModel)]="leaveModel.tdate" placeholder="To Date">
+                            <small class="text-danger" [class.d-none]="tdate.valid || tdate.untouched">To Date is required</small>
+                        </div>
+                    </div>
+                    
+
+                    <div class="form-group row">                    
+                        <label class="col-form-label col-sm-3">Total Days</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="tdays" [(ngModel)]="tdays">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-3">Leave Type</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" [(ngModel)]="leavetype" name="leavetype">
+                                <option>--Select--</option>
+                                <option *ngFor="let leave of leaves">
+                                    {{leave.LeaveName}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-3">Remarks</label>
+                        <div class="col-sm-8">
+                            <!-- <input type="text" class="form-control" name="remarks" [(ngModel)]="remarks"> -->
+                            <textarea rows="5" #remarks="ngModel" class="form-control" name="remarks" [class.is-invalid]="remarks.invalid && remarks.touched" required [(ngModel)]="leaveModel.remarks" placeholder="Remarks"></textarea>
+                            <small class="text-danger" [class.d-none]="remarks.valid || remarks.untouched">Remarks is required</small>
+                        </div>
+                    </div>
+
+                    
+                    <div class="form-group row">
+                        <div class="col-sm-3">
+                            <button class="btn btn-lg btn-outline-dark float-right" [disabled]="userForm.form.invalid" (click)="leaveRequest()">Request</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-3"></div>
+
+            </div>
+        </div>
+    </form>
+
+    <div class="my-2">
+        {{appStatus | async}}
+      
+
+    <div class="row" *ngIf="checkHead">
+        <div class="col-12">
+            <div class="form-group row">
+                <label class="col-form-label col-sm-1">Employee Name</label>
+                <div class="col-sm-5">
+                    <input type="text" name="empname" class="form-control" [(ngModel)]="empname">
+                </div>
+                <label class="col-form-label col-sm-1">Code</label>
+                <div class="col-sm-1">
+                    <input type="text" name="lcode" class="form-control" [(ngModel)]="lcode">
+                </div>
+            </div>
+
+            <div class="form-group row">                    
+                <label class="col-form-label col-sm-1">From Date</label>
+                <div class="col-sm-3">
+                    <input type="date" (ngModelChange)="datechange1($event)" class="form-control" name="empfdate" [(ngModel)]="empfdate">
+                </div>
+                <label class="col-form-label col-sm-1">To Date</label>
+                <div class="col-sm-3">
+                    <input type="date" (ngModelChange)="datechange2($event)" class="form-control" name="emptdate" [(ngModel)]="emptdate">
+                </div>
+                <label class="col-form-label col-sm-1">Total Days</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="emptdays" [(ngModel)]="emptdays">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-1">Leave Type</label>
+                <div class="col-sm-5">
+                    <input type="text" name="empleavetype" class="form-control" [(ngModel)]="empleavetype">
+                </div>
+                <label class="col-form-label col-sm-1">Remarks</label>
+                <div class="col-sm-5">
+                    <textarea rows="5" class="form-control" name="empremarks" [(ngModel)]="empremarks"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="card-toolbar col-sm-3">
+                    <button class="btn btn-lg btn-outline-dark btn-hover-primary" (click)="addLeave()">
+                        <span [inlineSVG]="'./assets/media/svg/icons/myIcons/checked.svg'" cacheSVG="true"
+                    class="svg-icon svg-icon-md svg-icon-primary">
+                  </span>Approved Request</button>
+                </div>
+                <div class="card-toolbar col-sm-3">
+                    <button class="btn btn-lg btn-outline-dark btn-hover-danger" (click)="declineLeave()">
+                        <span [inlineSVG]="'./assets/media/svg/icons/myIcons/cancel.svg'" cacheSVG="true"
+                    class="svg-icon svg-icon-md svg-icon-danger">
+                  </span>Decline Request</button>
+                </div>
+            </div>
+
+        </div>
+    </div>  
+</div>
+    
+
+    
+
+
+    
+    
+
+    
+
+    
+
+    
+    
+
+    <div class="table-responsive angular-bootstrap-table" *ngIf="checkHead">
+        <table class="table table-vertical-center overflow-hidden">
+          <thead>
+            
+            <th>Application Date</th>
+            <th>Employee Name </th>
+            <th>From Date</th>
+            <th>To Date</th>
+            <th>Leave Type</th>
+            <th>Remarks</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of tleave" (click)="loadForm(item)">
+              <td>{{ item.aDate.toString().substr(0,10) }}</td>
+              <td>{{ item.eid }}</td>
+              <td>{{ item.fromdate.toString().substr(0,10) }}</td>
+              <td>{{ item.todate.toString().substr(0,10) }}</td>
+              <td>{{ item.lid }}</td>
+              <td>{{ item.remarks }}</td>   
+            </tr>
+          </tbody>
+        </table>
+    </div>   
+</div>
+</div>
+</body>
